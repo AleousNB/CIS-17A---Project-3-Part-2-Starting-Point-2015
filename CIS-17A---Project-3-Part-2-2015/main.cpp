@@ -102,7 +102,7 @@ void search(shared_ptr<Folder> currentFolder)
 	// add method folder to serach file
 	// call searchmethod on currentfolder
 	// if search call rerturn nullptr -> file not found
-	// if file is found then cout "found file in (name of file)"
+	// if file is found then cout "found file in (name of folder)"
 
 	system("cls");
 	cout << "Enter the file you want to find" << endl;
