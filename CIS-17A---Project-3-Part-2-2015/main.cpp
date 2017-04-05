@@ -112,7 +112,7 @@ void search(shared_ptr<Folder> currentFolder)
 	
 	if (currentFolder->Search(name) != nullptr)
 	{
-		cout << currentFolder->Search(name)->getName() << " has been found";
+		cout << currentFolder->Search(name)->getName() << " has been found" << endl;
 	}
 	else
 	{
