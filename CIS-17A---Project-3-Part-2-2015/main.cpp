@@ -1,5 +1,6 @@
 #include "Folder.h"
 #include <iostream>
+#include <stack>
 using namespace std;
 void DisplayMenu(shared_ptr<Folder> currentFolder, shared_ptr<Folder> parent);
 void AddFileMenu(shared_ptr<Folder> currentFolder);
@@ -9,6 +10,7 @@ void search(shared_ptr<Folder> currentFolder);
 
 int main()
 {
+	stack <shared_ptr<Folder>> parentFolderStack;
 	auto currentFolder = make_shared<Folder>("Root");
 	auto parentFolder = make_shared<Folder>();
 	parentFolder = nullptr;
@@ -22,6 +24,7 @@ int main()
 		case 2: AddFileMenu(currentFolder); break;
 		case 3: {
 			auto newcurrent = NavigateToFolder(currentFolder); 
+			parentFolderStack.push(currentFolder);
 			parentFolder = currentFolder;
 			currentFolder = newcurrent;
 			cout << endl << "Now in folder " << newcurrent->getName() << "!";
@@ -33,7 +36,17 @@ int main()
 		case 4: AddFolderMenu(currentFolder); break;
 		case 6: {
 			if (parentFolder != nullptr) {
-				currentFolder = parentFolder;
+				currentFolder = parentFolderStack.top();
+				parentFolderStack.pop();
+		
+				if (parentFolderStack.empty() == false)
+				{
+					parentFolder = parentFolderStack.top();
+				}
+				else
+				{
+					parentFolder = nullptr;
+				}	
 				cout << endl << "Now in folder " << currentFolder->getName() << "!";
 			}
 			break;
